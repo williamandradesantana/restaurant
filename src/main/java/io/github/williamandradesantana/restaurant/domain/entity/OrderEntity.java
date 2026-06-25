@@ -74,4 +74,12 @@ public class OrderEntity {
     public void setObservation(String observation) {
         this.observation = observation;
     }
+
+    public TableEntity getTable() {
+        return table;
+    }
+
+    public void setTable(TableEntity table) {
+        this.table = table;
+    }
 }
