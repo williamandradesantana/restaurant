@@ -93,7 +93,7 @@ public class OrderService {
 
     public List<OrderItemResponse> listOrderItems(Long orderId) {
         searchOrderById(orderId);
-        return orderItemRepository.findByOrder_Id(orderId)
+        return orderItemRepository.findByOrderId(orderId)
                 .stream().map(OrderItemResponse::fromEntity).collect(Collectors.toList());
     }
 
