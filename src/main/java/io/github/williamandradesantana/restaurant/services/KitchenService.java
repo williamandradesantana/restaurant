@@ -7,6 +7,7 @@ import io.github.williamandradesantana.restaurant.exception.BusinessException;
 import io.github.williamandradesantana.restaurant.repositories.OrderItemRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,6 +38,7 @@ public class KitchenService {
             throw new BusinessException("Only pending items can begin preparation.");
 
         orderItem.setStatus(OrderItemStatus.IN_PREPARATION);
+        orderItem.setPreparationStartDate(LocalDateTime.now());
         return KitchenItemResponse.fromEntity(orderItemRepository.save(orderItem));
     }
 
@@ -47,6 +49,7 @@ public class KitchenService {
             throw new BusinessException("Only items currently being prepared can be ready.");
 
         orderItem.setStatus(OrderItemStatus.READY);
+        orderItem.setCompletionDate(LocalDateTime.now());
         return KitchenItemResponse.fromEntity(orderItemRepository.save(orderItem));
     }
 
@@ -57,6 +60,7 @@ public class KitchenService {
             throw new BusinessException("Only ready items can be delivered.");
 
         orderItem.setStatus(OrderItemStatus.DELIVERED);
+        orderItem.setDeliveryDate(LocalDateTime.now());
         return KitchenItemResponse.fromEntity(orderItemRepository.save(orderItem));
     }
 

@@ -4,6 +4,7 @@ import io.github.williamandradesantana.restaurant.domain.enums.OrderItemStatus;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_order_items")
@@ -30,6 +31,15 @@ public class OrderItemEntity {
 
     @Enumerated(EnumType.STRING)
     private OrderItemStatus status = OrderItemStatus.PENDING;
+
+    @Column(name = "preparation_start_date")
+    private LocalDateTime preparationStartDate;
+
+    @Column(name = "completion_date")
+    private LocalDateTime completionDate;
+
+    @Column(name = "delivery_date")
+    private LocalDateTime deliveryDate;
 
     public OrderItemEntity(){}
 
@@ -87,5 +97,29 @@ public class OrderItemEntity {
 
     public void setStatus(OrderItemStatus status) {
         this.status = status;
+    }
+
+    public LocalDateTime getPreparationStartDate() {
+        return preparationStartDate;
+    }
+
+    public void setPreparationStartDate(LocalDateTime preparationStartDate) {
+        this.preparationStartDate = preparationStartDate;
+    }
+
+    public LocalDateTime getCompletionDate() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(LocalDateTime completionDate) {
+        this.completionDate = completionDate;
+    }
+
+    public LocalDateTime getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(LocalDateTime deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 }
