@@ -9,4 +9,5 @@ import java.util.List;
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Long> {
     List<OrderItemEntity> findByOrderId(Long orderId);
     List<OrderItemEntity> findByStatusOrderByIdAsc(OrderItemStatus status);
+    List<OrderItemEntity> findByOrderIdAndStatusNot(Long orderId, OrderItemStatus status);
 }
