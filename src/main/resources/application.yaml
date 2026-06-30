@@ -27,3 +27,7 @@ spring:
   threads:
     virtual:
       enabled: ${SPRING_THREADS_VIRTUAL_ENABLED}
+
+payment:
+  api:
+    url: http://localhost:9090

@@ -5,6 +5,7 @@ import io.github.williamandradesantana.restaurant.dtos.OrderItemResponse;
 import io.github.williamandradesantana.restaurant.dtos.OrderRequest;
 import io.github.williamandradesantana.restaurant.dtos.OrderResponse;
 import io.github.williamandradesantana.restaurant.services.OrderService;
+import io.github.williamandradesantana.restaurant.services.PaymentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,11 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final PaymentService paymentService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, PaymentService paymentService) {
         this.orderService = orderService;
+        this.paymentService = paymentService;
     }
 
     @GetMapping
@@ -52,5 +55,11 @@ public class OrderController {
             @PathVariable("orderId") Long orderId, @RequestBody OrderItemRequest request
     ) {
         return orderService.addOrderItem(orderId, request);
+    }
+
+    @PostMapping("/{orderId}/pay")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void pay(@PathVariable("orderId") Long orderId, @RequestParam String paymentMethod) {
+        paymentService.pay(orderId, paymentMethod);
     }
 }
